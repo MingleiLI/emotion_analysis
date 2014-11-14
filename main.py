@@ -1,0 +1,39 @@
+## Author: Li Minglei
+## Date: 13/11/2014
+## Version: 1.0
+## Description: The main function of emotion analysis
+
+import affective_space
+import numpy as np
+#from scipy import linalg, mat, dot
+
+# define affective space object
+my_affective_space = affective_space.AffectiveSpace()
+
+
+# compute the consine similarity of two given vectors
+def compute_cosine_sim(vector1, vector2):
+    return np.inner(vector1, vector2)/np.linalg.norm(vector1)/np.linalg.norm(vector2)
+ 
+# compute the consine similarity of two given concepts, the input should be string
+def compute_concept_cos_sim(concept1, concept2):
+    concept1_vector = my_affective_space.get_concept_vector(concept1)
+    concept2_vector = my_affective_space.get_concept_vector(concept2)
+    return compute_cosine_sim(concept1_vector, concept2_vector)
+
+if __name__ == "__main__":
+    queen_vector = my_affective_space.get_concept_vector("queen")
+    king_vector = my_affective_space.get_concept_vector("king")
+    man_vector = my_affective_space.get_concept_vector("man")
+    woman_vector = my_affective_space.get_concept_vector("woman")
+    diff_king_queen = king_vector - queen_vector
+    diff_man_woman = man_vector - woman_vector
+    print "The similarity of \"king - queen\" and \"man - woman\" is  " + str(compute_cosine_sim(diff_king_queen, diff_man_woman))
+    
+    print "The similarity of \"party\" and \"gathering\" is " + str(compute_concept_cos_sim("party","gathering"))
+    print "The similarity of \"party\" and \"reception\" is " + str(compute_concept_cos_sim("party","reception"))
+    print "The similarity of \"party\" and \"man\" is " + str(compute_concept_cos_sim("party","man"))
+    print "The similarity of \"man\" and \"woman\" is " + str(compute_concept_cos_sim("man","woman"))
+    
+
+

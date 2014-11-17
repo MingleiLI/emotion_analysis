@@ -3,7 +3,7 @@
 #Des: Process the AffectiveSpace file
 #Date: 12/11/2014
 #Version: 1.0
-# how to summit to github??
+# howto summit to github??
 
 import numpy as np
 

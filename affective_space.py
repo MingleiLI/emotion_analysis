@@ -65,15 +65,15 @@ class AffectiveSpace(object):
             print "concept \"" + concept + "\" is not contained in AffectiveSpace, try again\n"
             return False
 
-
-
-
-
-
-
-
-
-
+# compute the consine similarity of two given vectors
+    def compute_cosine_sim(self, vector1, vector2):
+        return np.inner(vector1, vector2)/np.linalg.norm(vector1)/np.linalg.norm(vector2)
+ 
+# compute the consine similarity of two given concepts, the input should be string
+    def compute_concept_cos_sim(self, concept1, concept2):
+        concept1_vector = self.get_concept_vector(concept1)
+        concept2_vector = self.get_concept_vector(concept2)
+        return self.compute_cosine_sim(concept1_vector, concept2_vector)
 
 
 

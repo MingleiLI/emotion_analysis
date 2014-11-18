@@ -4,12 +4,13 @@
 ## Description: The main function of emotion analysis
 
 import affective_space
+import conceptnet_matrix  
 import numpy as np
 #from scipy import linalg, mat, dot
 
 # define affective space object
 my_affective_space = affective_space.AffectiveSpace()
-
+my_conceptnet = conceptnet_matrix.conceptnet()
 
 # compute the consine similarity of two given vectors
 def compute_cosine_sim(vector1, vector2):
@@ -28,12 +29,28 @@ if __name__ == "__main__":
     woman_vector = my_affective_space.get_concept_vector("woman")
     diff_king_queen = king_vector - queen_vector
     diff_man_woman = man_vector - woman_vector
-    print "The similarity of \"king - queen\" and \"man - woman\" is  " + str(compute_cosine_sim(diff_king_queen, diff_man_woman))
     
-    print "The similarity of \"party\" and \"gathering\" is " + str(compute_concept_cos_sim("party","gathering"))
-    print "The similarity of \"party\" and \"reception\" is " + str(compute_concept_cos_sim("party","reception"))
-    print "The similarity of \"party\" and \"man\" is " + str(compute_concept_cos_sim("party","man"))
-    print "The similarity of \"man\" and \"woman\" is " + str(compute_concept_cos_sim("man","woman"))
+    print "In affectiveSpace:\n"
+    print "The similarity of \"king - queen\" and \"man - woman\" is  " + str(my_affective_space.compute_cosine_sim(diff_king_queen, diff_man_woman))
+    print "The similarity of \"party\" and \"gathering\" is " + str(my_affective_space.compute_concept_cos_sim("party","gathering"))
+    print "The similarity of \"party\" and \"reception\" is " + str(my_affective_space.compute_concept_cos_sim("party","reception"))
+    print "The similarity of \"party\" and \"man\" is " + str(my_affective_space.compute_concept_cos_sim("party","man"))
+    print "The similarity of \"man\" and \"woman\" is " + str(my_affective_space.compute_concept_cos_sim("man","woman"))
+    
+    queen_vector2 = my_conceptnet.get_concept_vec("queen")
+    king_vector2 = my_conceptnet.get_concept_vec("king")
+    man_vector2 = my_conceptnet.get_concept_vec("man")
+    woman_vector2 = my_conceptnet.get_concept_vec("woman")
+    diff_king_queen2 = king_vector2 - queen_vector2
+    diff_man_woman2 = man_vector2 - woman_vector2
+    
+    print "\nIn conceptnet:\n"
+    print "The similarity of \"king - queen\" and \"man - woman\" is  " + str(compute_cosine_sim(diff_king_queen, diff_man_woman))
+    print "The similarity of \"party\" and \"gathering\" is " + str(my_affective_space.compute_concept_cos_sim("party","gathering"))
+    print "The similarity of \"party\" and \"reception\" is " + str(my_conceptnet.compute_concept_cos_sim("party","reception"))
+    print "The similarity of \"party\" and \"man\" is " + str(my_conceptnet.compute_concept_cos_sim("party","man"))
+    print "The similarity of \"man\" and \"woman\" is " + str(my_conceptnet.compute_concept_cos_sim("man","woman"))
+    
     
 
 

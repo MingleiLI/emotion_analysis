@@ -4,7 +4,7 @@
 #Date: 12/11/2014
 #Version: 1.0
 # howto summit to github??
-
+# Minglei Li
 import numpy as np
 
 

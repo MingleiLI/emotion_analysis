@@ -5,12 +5,15 @@
 
 import affective_space
 import conceptnet_matrix  
+import word_embedding_nn
 import numpy as np
+
 #from scipy import linalg, mat, dot
 
 # define affective space object
 my_affective_space = affective_space.AffectiveSpace()
 my_conceptnet = conceptnet_matrix.conceptnet()
+my_word_embedding = word_embedding_nn.WordEmbeddingC()
 
 # compute the consine similarity of two given vectors
 def compute_cosine_sim(vector1, vector2):
@@ -45,12 +48,27 @@ if __name__ == "__main__":
     diff_man_woman2 = man_vector2 - woman_vector2
     
     print "\nIn conceptnet:\n"
-    print "The similarity of \"king - queen\" and \"man - woman\" is  " + str(compute_cosine_sim(diff_king_queen, diff_man_woman))
+    print "The similarity of \"king - queen\" and \"man - woman\" is  " + str(compute_cosine_sim(diff_king_queen2, diff_man_woman2))
     print "The similarity of \"party\" and \"gathering\" is " + str(my_affective_space.compute_concept_cos_sim("party","gathering"))
     print "The similarity of \"party\" and \"reception\" is " + str(my_conceptnet.compute_concept_cos_sim("party","reception"))
     print "The similarity of \"party\" and \"man\" is " + str(my_conceptnet.compute_concept_cos_sim("party","man"))
     print "The similarity of \"man\" and \"woman\" is " + str(my_conceptnet.compute_concept_cos_sim("man","woman"))
     
+    queen_vector3 = my_word_embedding.get_word_vec("queen")
+    king_vector3 = my_word_embedding.get_word_vec("king")
+    man_vector3 = my_word_embedding.get_word_vec("man")
+    woman_vector3 = my_word_embedding.get_word_vec("woman")
+    diff_king_queen3 = king_vector3 - queen_vector3
+    diff_man_woman3 = man_vector3 - woman_vector3
+    
+    print "\nIn word Embedding:"
+    print "The similarity of \"king - queen\" and \"man - woman\" is  " + str(compute_cosine_sim(diff_king_queen3, diff_man_woman3))
+    print "The similarity of \"party\" and \"gathering\" is " + str(my_word_embedding.compute_word_cos_sim("party","gathering"))
+    print "The similarity of \"party\" and \"reception\" is " + str(my_word_embedding.compute_word_cos_sim("party","reception"))
+    print "The similarity of \"party\" and \"man\" is " + str(my_word_embedding.compute_word_cos_sim("party","man"))
+    print "The similarity of \"man\" and \"woman\" is " + str(my_word_embedding.compute_word_cos_sim("man","woman"))
+
+
     
 
 

@@ -16,7 +16,7 @@ class conceptnet(object):
     '''
     def __init__(self):
 #get the original sparce matrix
-        self.__conceptnet = divisi2.load('/opt/work/emotion_analysis/conceptnet_en.pickle')
+        self.__conceptnet = divisi2.load('/opt/work/emotion_analysis/data_source/conceptnet_en.pickle')
 
 #Get the matrix after svd
         self.__concept_axes, self.__axis_weights, self.__feature_axes = self.__conceptnet.svd(k=100)
